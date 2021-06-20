@@ -4,7 +4,7 @@ void main() {
   runApp(new Application());
 }
 
-// List with Array
+// App Bar
 class Application extends StatefulWidget {
   const Application({Key? key}) : super(key: key);
 
@@ -12,37 +12,148 @@ class Application extends StatefulWidget {
   _ApplicationState createState() => _ApplicationState();
 }
 
-// Dynamic List
 class _ApplicationState extends State<Application> {
 
-  List<int> items = []..length;
-
-  @override
-  void initState() {
-    for(int i=0; i<50; i++){
-      items.add(i);
-    }
-    super.initState();
-  }
+  String mText = '';
 
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
-      title: 'Tushar',
       home: new Scaffold(
-        appBar: new AppBar(title: new Text('Tushar'),),
-        body: new ListView.builder(
-          itemCount: items.length,
-            itemBuilder: (BuildContext context, int index) {
-              return new ListTile(
-                title: new Text('Item No : $index'),
-                trailing: new Icon(Icons.arrow_forward),
-              );
-        }),
+        appBar: new AppBar(
+          backgroundColor: Colors.green,
+          title: new Text('App Bar'),
+          // centerTitle: true,
+          elevation: 30,
+          titleSpacing: 60,
+          // toolbarOpacity: 0.5,
+          leading: new Icon(Icons.menu),
+          actions: [
+            new IconButton(onPressed: () { setState(() {
+              mText = 'Home';
+            });}, icon: new Icon(Icons.home)),
+            new IconButton(onPressed: () { setState(() {
+              mText = 'Close';
+            });}, icon: new Icon(Icons.close)),
+          ],
+        ),
+        body: new Center(
+          child: new Text(mText),
+        ),
       ),
     );
   }
 }
+
+
+// // Grid View
+// class Application extends StatefulWidget {
+//   const Application({Key? key}) : super(key: key);
+//
+//   @override
+//   _ApplicationState createState() => _ApplicationState();
+// }
+//
+// class _ApplicationState extends State<Application> {
+//
+//   List<int> items = []..length;
+//
+//   @override
+//   void initState() {
+//     for(int i = 0 ; i < 50; i++) {
+//       items.add(i);
+//     }
+//     super.initState();
+//   }
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return new MaterialApp(
+//       home: new Scaffold(
+//         body: new GridView.builder(
+//           itemCount: items.length,
+//             gridDelegate: new SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4),
+//             itemBuilder: (BuildContext context, int index) {
+//               return new Card(
+//                 color: Colors.blue,
+//                 child: new Padding(padding: const EdgeInsets.all(20)),
+//               );
+//           }
+//           )
+//       ),
+//     );
+//   }
+// }
+
+
+// // Stack View
+// class Application extends StatefulWidget {
+//   const Application({Key? key}) : super(key: key);
+//
+//   @override
+//   _ApplicationState createState() => _ApplicationState();
+// }
+//
+// class _ApplicationState extends State<Application> {
+//   @override
+//   Widget build(BuildContext context) {
+//     return new MaterialApp(
+//       home : new Scaffold(
+//         body: new Stack(
+//           alignment: Alignment.center,
+//           children: [
+//             new Card(color: Colors.pink, child: new Padding(padding: const EdgeInsets.all(200.0)),),
+//             new Card(color: Colors.yellow, child: new Padding(padding: const EdgeInsets.all(100.0)),),
+//             new Card(color: Colors.green, child: new Padding(padding: const EdgeInsets.all(50.0)),),
+//             new Card(color: Colors.brown, child: new Padding(padding: const EdgeInsets.all(30.0)),),
+//             new Card(color: Colors.blue, child: new Padding(padding: const EdgeInsets.all(10.0)),)
+//           ],
+//         ),
+//       ),
+//     );
+//   }
+// }
+
+
+// List with Array
+// class Application extends StatefulWidget {
+//   const Application({Key? key}) : super(key: key);
+//
+//   @override
+//   _ApplicationState createState() => _ApplicationState();
+// }
+//
+// // Dynamic List
+// class _ApplicationState extends State<Application> {
+//
+//   List<int> items = []..length;
+//
+//   @override
+//   void initState() {
+//     for(int i=0; i<50; i++){
+//       items.add(i);
+//     }
+//     super.initState();
+//   }
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return new MaterialApp(
+//       title: 'Tushar',
+//       home: new Scaffold(
+//         appBar: new AppBar(title: new Text('Tushar'),),
+//         body: new ListView.builder(
+//           itemCount: items.length,
+//             itemBuilder: (BuildContext context, int index) {
+//               return new ListTile(
+//                 title: new Text('Item No : $index'),
+//                 trailing: new Icon(Icons.arrow_forward),
+//               );
+//         }),
+//       ),
+//     );
+//   }
+// }
 
 // Simple List
 // class Application extends StatelessWidget {
