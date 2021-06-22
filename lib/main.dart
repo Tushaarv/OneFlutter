@@ -4,7 +4,7 @@ void main() {
   runApp(new Application());
 }
 
-// App Bar
+// Tab Bar
 class Application extends StatefulWidget {
   const Application({Key? key}) : super(key: key);
 
@@ -12,38 +12,99 @@ class Application extends StatefulWidget {
   _ApplicationState createState() => _ApplicationState();
 }
 
-class _ApplicationState extends State<Application> {
+class _ApplicationState extends State<Application> with SingleTickerProviderStateMixin {
+
+  TabController? _tabController;
 
   String mText = '';
+
+  @override
+  void initState() {
+    _tabController = new TabController(length: 3, vsync: this);
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
     return new MaterialApp(
       home: new Scaffold(
         appBar: new AppBar(
-          backgroundColor: Colors.green,
-          title: new Text('App Bar'),
-          // centerTitle: true,
-          elevation: 30,
-          titleSpacing: 60,
-          // toolbarOpacity: 0.5,
-          leading: new Icon(Icons.menu),
-          actions: [
-            new IconButton(onPressed: () { setState(() {
-              mText = 'Home';
-            });}, icon: new Icon(Icons.home)),
-            new IconButton(onPressed: () { setState(() {
-              mText = 'Close';
-            });}, icon: new Icon(Icons.close)),
-          ],
+          title: new Text('Tabs'),
+          bottom: new TabBar(
+            controller: _tabController,
+              tabs: [
+                new Tab(icon: new Icon(Icons.home),),
+                new Tab(icon: new Icon(Icons.supervisor_account),),
+                new Tab(icon: new Icon(Icons.close),)
+              ],
+          ),
         ),
-        body: new Center(
-          child: new Text(mText),
+        body: new TabBarView(
+            controller : _tabController,
+            children: [
+              new Center( child : new Text('Home'),),
+              new Center( child : new Text('Account'),),
+              new Center( child : new Text('Close'),)
+            ],
+        ),
+        bottomNavigationBar: new Material(
+          color: Colors.blue,
+          child : new TabBar(
+            controller: _tabController,
+            tabs: [
+              new Tab(icon: new Icon(Icons.home),),
+              new Tab(icon: new Icon(Icons.supervisor_account),),
+              new Tab(icon: new Icon(Icons.close),)
+            ],
+          ),
         ),
       ),
     );
   }
 }
+
+
+
+// // App Bar
+// class Application extends StatefulWidget {
+//   const Application({Key? key}) : super(key: key);
+//
+//   @override
+//   _ApplicationState createState() => _ApplicationState();
+// }
+//
+// class _ApplicationState extends State<Application> {
+//
+//   String mText = '';
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return new MaterialApp(
+//       home: new Scaffold(
+//         appBar: new AppBar(
+//           backgroundColor: Colors.green,
+//           title: new Text('App Bar'),
+//           // centerTitle: true,
+//           elevation: 30,
+//           titleSpacing: 60,
+//           // toolbarOpacity: 0.5,
+//           leading: new Icon(Icons.menu),
+//           actions: [
+//             new IconButton(onPressed: () { setState(() {
+//               mText = 'Home';
+//             });}, icon: new Icon(Icons.home)),
+//             new IconButton(onPressed: () { setState(() {
+//               mText = 'Close';
+//             });}, icon: new Icon(Icons.close)),
+//           ],
+//         ),
+//         body: new Center(
+//           child: new Text(mText),
+//         ),
+//       ),
+//     );
+//   }
+// }
 
 
 // // Grid View
